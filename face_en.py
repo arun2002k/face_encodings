@@ -8,7 +8,6 @@ video_capture = cv2.VideoCapture(0)
 known_face_encodings = []
 
 while True:
-    # Capture a frame from the webcam
     ret, frame = video_capture.read()
 
     # Find face locations in the current frame
@@ -23,7 +22,7 @@ while True:
         if len(face_encodings) > 0:
             known_face_encodings.append(face_encodings[0])
 
-    # Display the video frame with face rectangles
+    # Display face rectangles
     for (top, right, bottom, left) in face_locations:
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
@@ -39,6 +38,5 @@ with open('face_encodings.txt', 'w') as file:
         encoding_str = ','.join(map(str, encoding))
         file.write(encoding_str + '\n')
 
-# Release the video capture and close the OpenCV window
 video_capture.release()
 cv2.destroyAllWindows()
